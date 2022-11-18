@@ -1,8 +1,8 @@
-const Users = require('../../api/v1/auth/model');
+const Users = require('../../api/v1/users/model');
 const { BadRequestError, UnauthorizedError } = require('../../errors');
 const { createTokenUser, createJWT } = require('../../utils');
 
-const sigin = async (req) => {
+const signin = async (req) => {
   const { email, password } = req.body;
   if ((!email, !password)) {
     throw new BadRequestError('Please provide email and password');
@@ -13,6 +13,8 @@ const sigin = async (req) => {
   if (!result) {
     throw new UnauthorizedError('Invalid Credentials');
   }
+
+  console.log(result);
 
   const isPasswordCorrect = await result.comparePassword(password);
   if (!isPasswordCorrect) {
