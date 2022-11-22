@@ -9,7 +9,10 @@ const getAllCategories = async (req) => {
 
 const createCategories = async (req) => {
   const { name } = req.body;
-  const check = await Categories.findOne({ name }); // cek duplikasi
+  const check = await Categories.findOne({
+    name,
+    organizer: req.user.organizer,
+  }); // cek duplikasi
   if (check) throw new BadRequestError('kategori nama duplikat'); // jika true tampilkan error
   const result = await Categories.create({ name, organizer: req.user.organizer });
 

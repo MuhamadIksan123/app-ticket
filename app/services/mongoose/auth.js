@@ -14,8 +14,6 @@ const signin = async (req) => {
     throw new UnauthorizedError('Invalid Credentials');
   }
 
-  console.log(result);
-
   const isPasswordCorrect = await result.comparePassword(password);
   if (!isPasswordCorrect) {
     throw new UnauthorizedError('Invalid Credentials');

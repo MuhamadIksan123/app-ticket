@@ -1,9 +1,18 @@
 // import model category
-const { createOrganizer, createUsers } = require('../../../services/mongoose/users');
-
+const { createOrganizer, createUsers, getAllUsers } = require('../../../services/mongoose/users');
 const { StatusCodes } = require('http-status-codes');
 
-// buat function create
+const getCMSUsers = async (req, res, next) => {
+  try {
+    const result = await getAllUsers(req);
+    res.status(StatusCodes.OK).json({
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const createCMSOrganizer = async (req, res, next) => {
   try {
     const result = await createOrganizer(req);
@@ -30,5 +39,6 @@ const createCMSUser = async (req, res, next) => {
 // Export fungsi create pada controller categories
 module.exports = {
   createCMSOrganizer,
-  createCMSUser
+  createCMSUser,
+  getCMSUsers
 };

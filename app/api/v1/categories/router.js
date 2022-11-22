@@ -1,6 +1,5 @@
 const express = require('express');
 router = express();
-// import product controller
 const { create, index, find, update, destroy } = require('./controller');
 
 const {
