@@ -7,7 +7,7 @@ const cors = require('cors');
 const app = express();
 
 // router
-const routerCategories = require('./app/api/v1//categories/router');
+const routerCategories = require('./app/api/v1/categories/router');
 const routerImages = require('./app/api/v1/images/router');
 const talentsRouter = require('./app/api/v1/talents/router');
 const eventsRouter = require('./app/api/v1/events/router');
@@ -16,7 +16,7 @@ const authCMSRouter = require('./app/api/v1/auth/router');
 const ordersRouter = require('./app/api/v1/orders/router');
 const participantsRouter = require('./app/api/v1/participants/router');
 const paymentsRouter = require('./app/api/v1/payments/router');
-
+const userRefreshTokenRouter = require('./app/api/v1/userRefreshToken/router');
 
 const v1 = '/api/v1';
 
@@ -44,6 +44,7 @@ app.use(`${v1}/cms`, organizersRouter);
 app.use(`${v1}/cms`, authCMSRouter);
 app.use(`${v1}/cms`, ordersRouter);
 app.use(`${v1}/cms`, paymentsRouter);
+app.use(`${v1}/cms`, userRefreshTokenRouter);
 app.use(`${v1}`, participantsRouter);
 
 // middlewares
