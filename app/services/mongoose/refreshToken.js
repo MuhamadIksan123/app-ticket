@@ -14,7 +14,7 @@ const createUserRefreshToken = async (payload) => {
 };
 
 const getUserRefreshToken = async (req) => {
-  const { refreshToken, email } = req.params;
+  const { refreshToken } = req.params;
   const result = await UserRefreshToken.findOne({
     refreshToken,
   });
@@ -22,10 +22,6 @@ const getUserRefreshToken = async (req) => {
   if (!result) throw new NotFoundError(`refreshToken tidak valid `);
 
   const payload = isTokenValidRefreshToken({ token: result.refreshToken });
-
-  if (email !== payload.email) {
-    throw new BadRequestError('Email tidak valid');
-  }
 
   const userCheck = await Users.findOne({ email: payload.email });
 
