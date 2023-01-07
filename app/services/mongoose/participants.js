@@ -8,10 +8,9 @@ const {
   NotFoundError,
   UnauthorizedError,
 } = require('../../errors');
-
 const { createTokenParticipant, createJWT } = require('../../utils');
 
-const { otpMail } = require('../mail/index');
+const { otpMail } = require('../mail');
 
 const signupParticipant = async (req) => {
   const { firstName, lastName, email, password, role } = req.body;

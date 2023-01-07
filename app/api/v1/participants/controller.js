@@ -5,7 +5,8 @@ const {
   getAllEvents,
   getOneEvent,
   getAllOrders,
-  checkoutOrder
+  checkoutOrder,
+  getAllPaymentByOrganizer,
 } = require('../../../services/mongoose/participants');
 
 const { StatusCodes } = require('http-status-codes');
@@ -58,6 +59,18 @@ const getAllLandingPage = async (req, res, next) => {
   }
 };
 
+const getDashboard = async (req, res, next) => {
+  try {
+    const result = await getAllOrders(req);
+
+    res.status(StatusCodes.OK).json({
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getDetailLandingPage = async (req, res, next) => {
   try {
     const result = await getOneEvent(req);
@@ -70,9 +83,9 @@ const getDetailLandingPage = async (req, res, next) => {
   }
 };
 
-const getDashboard = async (req, res, next) => {
+const getAllPayment = async (req, res, next) => {
   try {
-    const result = await getAllOrders(req);
+    const result = await getAllPaymentByOrganizer(req);
 
     res.status(StatusCodes.OK).json({
       data: result,
@@ -90,12 +103,9 @@ const checkout = async (req, res, next) => {
       data: result,
     });
   } catch (err) {
-    console.log(err)
     next(err);
   }
 };
-
-
 
 module.exports = {
   signup,
@@ -104,5 +114,6 @@ module.exports = {
   getAllLandingPage,
   getDetailLandingPage,
   getDashboard,
-  checkout
+  checkout,
+  getAllPayment,
 };
